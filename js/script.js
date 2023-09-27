@@ -1,42 +1,18 @@
-document.addEventListener("DOMContentLoaded", function () {
-	Alpine.data("todoApp", function () {
-		return {
-			theme: true,
-			checkbox: false,
-			direction: "ltr",
-			todos: [],
-			inputTodo: "",
-			show: "all",
-			selectedCategory: "work",
-
-			addTodo() {
-				if (this.inputTodo.trim().length) {
-					this.todos.push({
-						name: this.inputTodo,
-						completed: false,
-						category: this.selectedCategory,
-					});
-					this.inputTodo = "";
-				}
-			},
-
-		};
-	});
-});
-
-//When your page is fully loaded
 window.addEventListener("load", function () {
-	// Create a GSAP timeline
-	const tl = gsap.timeline();
+	const todoform = document.querySelector("#todoform");
+	const controls = document.querySelector("#controls");
+	const title = document.querySelector("#title");
+	const sunicon = document.querySelector("#sun-icon");
+	const directionicon = document.querySelector("#direction-icon");
 
-	// Add fade-in animation for the title
-	tl.to("#title", { opacity: 1, duration: 2 });
+	const initialAnimation = gsap.timeline();
 
-	// Add fade-in animation for the sun icon
-	tl.to("#sun-icon", { opacity: 1, duration: 1 }, "-=2"); // Start after the title animation
+	initialAnimation.from(title, { duration: 0.5, y: -150, ease: 'power2.inOut' });
+	initialAnimation.from(sunicon, { duration: 0.5, y: -150, ease: 'power2.inOut' });
+	initialAnimation.from(directionicon, { duration: 0.5, y: -150, ease: 'power2.inOut' });
+	initialAnimation.from(todoform, { duration: 0.5, x: 1220, ease: 'power2.inOut' });
 
-	// Add fade-in animation for the direction icon
-	tl.to("#direction-icon", { opacity: 1, duration: 1 }, "-=2"); // Start after the sun icon animation
+	// Ensure the controls element is visible before animating
+	gsap.set(controls, { visibility: 'visible' });
+	initialAnimation.from(controls, { duration: 0.5, x: -1400, ease: 'power2.inOut' });
 });
-
-

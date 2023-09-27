@@ -23,10 +23,7 @@
 			defer
 			src="./js/alpine.js"
 		></script>
-		<script
-			defer
-			src="./js/script.js"
-		></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 	</head>
 	<body
 		x-data="{ theme: true, checkbox: false, direction: 'ltr' }"
@@ -65,6 +62,7 @@
 				class="rounded-md text-left px-5 py-3 mb-5 shadow-md"
 				:class="theme ? 'bg-dark-200 transition-all' : 'bg-light-100 transition-all'"
 				x-data="{selected: false}"
+				id="todoform"
 			>
 				<form
 					class="flex items-center"
@@ -79,35 +77,17 @@
 						<img
 							x-show="selected"
 							src="./assets/icons/icon-check.svg"
+							alt="Completed"
 						/>
 					</span>
 					<input
 						type="text"
+						id="inputField"
 						class="bg-transparent outline-none text-lg w-[80%] ml-5 pt-1"
 						:class="theme ? 'text-dark-300  ' : 'text-light-400'"
 						placeholder="Create a new todo ..."
 						x-model="inputTodo"
 					/>
-					<select
-						class="ml-2"
-						x-model="selectedCategory"
-					>
-						<option value="work">
-							Work
-						</option>
-						<option value="personal">
-							Personal
-						</option>
-						<option value="shopping">
-							Shopping
-						</option>
-					</select>
-					<button
-						@click="addTodo"
-						class="ml-3 bg-primary-200 text-light-100 px-4 py-2 rounded-lg hover:bg-primary-300 transition-all"
-					>
-						Add
-					</button>
 				</form>
 			</div>
 
@@ -116,7 +96,7 @@
 				:class="theme ? 'bg-dark-200 transition-all' : 'bg-light-100 transition-all'"
 				x-data="{dragStartIndex: 0, dragEndIndex: 0, indexHover: null, btnCross: null, changePosition(a,b) {[todos[a], todos[b]] = [todos[b], todos[a]]}}"
 			>
-				<ul>
+				<ul id="toDoContainer">
 					<template
 						x-if="show == 'active'"
 					>
@@ -124,6 +104,7 @@
 							x-for="(todo, index) in todos"
 						>
 							<li
+								id="toDoAdded"
 								class="p-5 border-b border-light-300 flex justify-between items-center animate-slide-in"
 								draggable="true"
 								x-on:dragstart="dragStartIndex = index"
@@ -147,6 +128,7 @@
 										<img
 											x-show="todo.completed"
 											src="./assets/icons/icon-check.svg"
+											alt="Completed"
 										/>
 									</span>
 									<span
@@ -167,7 +149,7 @@
 								>
 									<img
 										src="./assets/icons/icon-cross.svg"
-										alt=""
+										alt="Delete"
 									/>
 								</div>
 							</li>
@@ -180,6 +162,7 @@
 							x-for="(todo, index) in todos"
 						>
 							<li
+								id="toDoAdded"
 								class="p-5 border-b flex justify-between items-center animate-slide-in"
 								draggable="true"
 								x-on:dragstart="dragStartIndex = index"
@@ -203,6 +186,7 @@
 										<img
 											x-show="todo.completed"
 											src="./assets/icons/icon-check.svg"
+											alt="Completed"
 										/>
 									</span>
 									<span
@@ -223,7 +207,7 @@
 								>
 									<img
 										src="./assets/icons/icon-cross.svg"
-										alt=""
+										alt="Delete"
 									/>
 								</div>
 							</li>
@@ -236,6 +220,7 @@
 							x-for="(todo, index) in todos"
 						>
 							<li
+								id="toDoAdded"
 								class="px-5 py-5 border-b flex justify-between items-center animate-slide-in"
 								draggable="true"
 								x-on:dragstart="dragStartIndex = index"
@@ -258,6 +243,7 @@
 										<img
 											x-show="todo.completed"
 											src="./assets/icons/icon-check.svg"
+											alt="Completed"
 										/>
 									</span>
 									<span
@@ -278,7 +264,7 @@
 								>
 									<img
 										src="./assets/icons/icon-cross.svg"
-										alt=""
+										alt="Delete"
 									/>
 								</div>
 							</li>
@@ -326,10 +312,9 @@
 					>
 				</div>
 			</div>
-			<!-- end todo list -->
 
-			<!-- bottom navigation -->
 			<div
+				id="controls"
 				class="rounded-md text-left p-3 pt-5 shadow-md text-center md:hidden"
 				:class="theme ? 'bg-dark-200' : 'bg-light-100'"
 			>
@@ -362,5 +347,9 @@
 				Drag and drop to reorder list
 			</p>
 		</main>
+		<script
+			defer
+			src="./js/script.js"
+		></script>
 	</body>
 </html>
