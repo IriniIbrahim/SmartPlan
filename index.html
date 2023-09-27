@@ -10,13 +10,6 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="./images/favicon-32x32.png"
-		/>
-
 		<title>
 			SmartPlan - planning and
 			organization tool
@@ -50,7 +43,7 @@
 			>
 				<h1
 					id="title"
-					class="uppercase text-3xl font-bold tracking-[15px]"
+					class="uppercase text-3xl font-bold tracking-[10px]"
 				>
 					SmartPlan
 				</h1>
@@ -95,6 +88,26 @@
 						placeholder="Create a new todo ..."
 						x-model="inputTodo"
 					/>
+					<select
+						class="ml-2"
+						x-model="selectedCategory"
+					>
+						<option value="work">
+							Work
+						</option>
+						<option value="personal">
+							Personal
+						</option>
+						<option value="shopping">
+							Shopping
+						</option>
+					</select>
+					<button
+						@click="addTodo"
+						class="ml-3 bg-primary-200 text-light-100 px-4 py-2 rounded-lg hover:bg-primary-300 transition-all"
+					>
+						Add
+					</button>
 				</form>
 			</div>
 
